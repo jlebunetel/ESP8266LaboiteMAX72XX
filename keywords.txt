@@ -7,7 +7,7 @@
 #######################################
 
 ESP8266LaboiteMAX72XX	KEYWORD1
-LaboiteMAX72XX	KEYWORD1
+LedMatrixPanel	KEYWORD1
 
 #######################################
 # Methods and Functions (KEYWORD2)

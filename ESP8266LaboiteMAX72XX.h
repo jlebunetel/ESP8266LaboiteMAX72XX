@@ -74,9 +74,9 @@
 #define DISPLAY_TEST_MODE             0b00000001
 
 // library interface description
-class LaboiteMAX72XX {
+class LedMatrixPanel {
   public:
-    LaboiteMAX72XX(void);
+    LedMatrixPanel(void);
 
     void init();
     void intensity(uint8_t value);

@@ -1,11 +1,11 @@
 #include "Arduino.h"
 #include "ESP8266LaboiteMAX72XX.h"
 
-LaboiteMAX72XX::LaboiteMAX72XX(void) {
+LedMatrixPanel::LedMatrixPanel(void) {
 
 }
 
-void LaboiteMAX72XX::init() {
+void LedMatrixPanel::init() {
   pinMode(pinMOSI, OUTPUT);
   digitalWrite(pinMOSI, LOW);
 
@@ -26,7 +26,7 @@ void LaboiteMAX72XX::init() {
   clear();
 }
 
-void LaboiteMAX72XX::shiftMSBFirst(uint8_t data) {
+void LedMatrixPanel::shiftMSBFirst(uint8_t data) {
   uint8_t k;
   for (uint8_t j = 0; j < 8; j++) {
     k = data & 0x80;  // return the MSB
@@ -41,7 +41,7 @@ void LaboiteMAX72XX::shiftMSBFirst(uint8_t data) {
   }
 }
 
-void LaboiteMAX72XX::shiftLSBFirst(uint8_t data) {
+void LedMatrixPanel::shiftLSBFirst(uint8_t data) {
   uint8_t k;
   for (uint8_t j = 0; j < 8; j++) {
     k = data & 0x01;  // return the LSB
@@ -55,17 +55,17 @@ void LaboiteMAX72XX::shiftLSBFirst(uint8_t data) {
   }
 }
 
-void LaboiteMAX72XX::command(uint8_t address, uint8_t data) {
+void LedMatrixPanel::command(uint8_t address, uint8_t data) {
   shiftMSBFirst(address);
   shiftMSBFirst(data);
 }
 
-void LaboiteMAX72XX::sendDigit(uint8_t digit, uint8_t data) {
+void LedMatrixPanel::sendDigit(uint8_t digit, uint8_t data) {
   shiftMSBFirst(digit);
   shiftLSBFirst(data);
 }
 
-void LaboiteMAX72XX::commandAll(uint8_t address, uint8_t data) {
+void LedMatrixPanel::commandAll(uint8_t address, uint8_t data) {
   MAX72XX_CS1_0;
   MAX72XX_CS2_0;
 
@@ -77,7 +77,7 @@ void LaboiteMAX72XX::commandAll(uint8_t address, uint8_t data) {
   MAX72XX_CS2_1;
 }
 
-void LaboiteMAX72XX::intensity(uint8_t value) {
+void LedMatrixPanel::intensity(uint8_t value) {
   // value between 0 and 15
   if (value > 15) {
     value = 15;
@@ -85,13 +85,13 @@ void LaboiteMAX72XX::intensity(uint8_t value) {
   commandAll(INTENSITY, value);
 }
 
-void LaboiteMAX72XX::clear() {
+void LedMatrixPanel::clear() {
   for (uint8_t digit = 1; digit < 9; digit++) {
     commandAll(digit, 0);
   }
 }
 
-void LaboiteMAX72XX::test() {
+void LedMatrixPanel::test() {
   while(1) {
     for (uint8_t digit = 1; digit < 9; digit++) {
       commandAll(digit, 0b10101010);
@@ -104,7 +104,7 @@ void LaboiteMAX72XX::test() {
   }
 }
 
-void LaboiteMAX72XX::display(uint8_t * buffer64) {
+void LedMatrixPanel::display(uint8_t * buffer64) {
   int buffer_offset = 0;
 
   for (uint8_t digit = 8; digit > 0; digit--) {

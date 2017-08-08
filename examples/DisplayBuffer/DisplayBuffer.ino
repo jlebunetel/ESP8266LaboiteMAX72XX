@@ -1,6 +1,6 @@
 #include <ESP8266LaboiteMAX72XX.h>
 
-LaboiteMAX72XX afficheur;
+LedMatrixPanel afficheur;
 
 uint8_t image[64] = {0b11000000, 0b00000000, 0b00000000, 0b00000000, // leds rouges
                      0b00000000, 0b00100000, 0b00000000, 0b00000000,
