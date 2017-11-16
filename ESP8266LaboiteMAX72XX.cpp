@@ -106,31 +106,17 @@ void LedMatrixPanel::test() {
 
 
 void LedMatrixPanel::display(uint8_t * buffer64) {
-  for (uint8_t digit = 1; digit < 9; digit++) {
+  for (uint8_t ligne = 0; ligne < 8; ligne++) {
     MAX72XX_CS1_0;
-    for (uint8_t driver = 4; driver > 0; driver--) {
-      //sendDigit(digit, (digit-1) + ((driver-1)<<4));
-      uint8_t colonne = 0;
-      for (uint8_t segment = 0; segment < 8; segment ++) {
-        //colonne += (buffer64[segment*4 + (driver-1)] & (1 << 7)) >> segment;
-        uint8_t pixel = (buffer64[segment*4 + (driver-1)] & (1 << (8-digit))) >> (8-digit);
-        colonne += pixel << segment;
-      }
-      sendDigit(digit, colonne);
+    for (uint8_t driver = 0; driver < 4; driver++) {
+      sendDigit((8 - ligne), buffer64[4 * ligne + (3 - driver)]);
     }
     MAX72XX_CS1_1;
   }
-  for (uint8_t digit = 1; digit < 9; digit++) {
+  for (uint8_t ligne = 0; ligne < 8; ligne++) {
     MAX72XX_CS2_0;
-    for (uint8_t driver = 4; driver > 0; driver--) {
-      //sendDigit(digit, (digit-1) + ((driver-1)<<4));
-      uint8_t colonne = 0;
-      for (uint8_t segment = 0; segment < 8; segment ++) {
-        //colonne += (buffer64[segment*4 + (driver-1)] & (1 << 7)) >> segment;
-        uint8_t pixel = (buffer64[segment*4 + (driver-1) + 32] & (1 << (8-digit))) >> (8-digit);
-        colonne += pixel << segment;
-      }
-      sendDigit(digit, colonne);
+    for (uint8_t driver = 0; driver < 4; driver++) {
+      sendDigit((8 - ligne), buffer64[4 * ligne + (3 - driver) + 32]);
     }
     MAX72XX_CS2_1;
   }
