@@ -5,17 +5,14 @@
 // soit un écran de 32 x 16 leds monochromes
 
 #define pinMOSI 13
-#define pinCS1  15
+#define pinCS   15
 #define pinCLK  14
-#define pinCS2   2
 
 #define CLK_DELAY         __asm__("nop\n\t""nop\n\t""nop\n\t""nop\n\t""nop\n\t")
 #define MAX72XX_CLK_0     (GPIO_REG_WRITE(GPIO_OUT_W1TC_ADDRESS, 1<<14))
 #define MAX72XX_CLK_1     (GPIO_REG_WRITE(GPIO_OUT_W1TS_ADDRESS, 1<<14))
-#define MAX72XX_CS1_0     (GPIO_REG_WRITE(GPIO_OUT_W1TC_ADDRESS, 1<<15))
-#define MAX72XX_CS1_1     (GPIO_REG_WRITE(GPIO_OUT_W1TS_ADDRESS, 1<<15))
-#define MAX72XX_CS2_0     (GPIO_REG_WRITE(GPIO_OUT_W1TC_ADDRESS, 1<<2))
-#define MAX72XX_CS2_1     (GPIO_REG_WRITE(GPIO_OUT_W1TS_ADDRESS, 1<<2))
+#define MAX72XX_CS_0     (GPIO_REG_WRITE(GPIO_OUT_W1TC_ADDRESS, 1<<15))
+#define MAX72XX_CS_1     (GPIO_REG_WRITE(GPIO_OUT_W1TS_ADDRESS, 1<<15))
 #define MAX72XX_DATA_0    (GPIO_REG_WRITE(GPIO_OUT_W1TC_ADDRESS, 1<<13))
 #define MAX72XX_DATA_1    (GPIO_REG_WRITE(GPIO_OUT_W1TS_ADDRESS, 1<<13))
 #define MAX72XX_DATA(x)   ((x)?MAX72XX_DATA_1:MAX72XX_DATA_0)

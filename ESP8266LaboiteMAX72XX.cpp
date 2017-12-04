@@ -9,11 +9,8 @@ void LedMatrixPanel::init() {
   pinMode(pinMOSI, OUTPUT);
   digitalWrite(pinMOSI, LOW);
 
-  pinMode(pinCS1, OUTPUT);
-  digitalWrite(pinCS1, HIGH);
-
-  pinMode(pinCS2, OUTPUT);
-  digitalWrite(pinCS2, HIGH);
+  pinMode(pinCS, OUTPUT);
+  digitalWrite(pinCS, HIGH);
 
   pinMode(pinCLK, OUTPUT);
   digitalWrite(pinCLK, LOW);
@@ -66,15 +63,11 @@ void LedMatrixPanel::sendDigit(uint8_t digit, uint8_t data) {
 }
 
 void LedMatrixPanel::commandAll(uint8_t address, uint8_t data) {
-  MAX72XX_CS1_0;
-  MAX72XX_CS2_0;
-
-  for (uint8_t i = 0; i < 4; i++) {
+  MAX72XX_CS_0;
+  for (uint8_t i = 0; i < 8; i++) {
     command(address, data);
   }
-
-  MAX72XX_CS1_1;
-  MAX72XX_CS2_1;
+  MAX72XX_CS_1;
 }
 
 void LedMatrixPanel::intensity(uint8_t value) {
@@ -104,16 +97,15 @@ void LedMatrixPanel::test() {
   }
 }
 
-
 void LedMatrixPanel::display(uint8_t * buffer64) {
   for (uint8_t ligne = 1; ligne < 9; ligne++) {
-    MAX72XX_CS1_0;
+    MAX72XX_CS_0;
     for (uint8_t driver = 0; driver < 4; driver++) {
       sendDigit(ligne, buffer64[4 * (9 - ligne) - driver + 31]);
     }
     for (uint8_t driver = 0; driver < 4; driver++) {
       sendDigit(ligne, buffer64[4 * (9 - ligne) - driver - 1 ]);
     }
-    MAX72XX_CS1_1;
+    MAX72XX_CS_1;
   }
 }
