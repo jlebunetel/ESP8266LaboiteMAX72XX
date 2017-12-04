@@ -106,18 +106,14 @@ void LedMatrixPanel::test() {
 
 
 void LedMatrixPanel::display(uint8_t * buffer64) {
-  for (uint8_t ligne = 0; ligne < 8; ligne++) {
+  for (uint8_t ligne = 1; ligne < 9; ligne++) {
     MAX72XX_CS1_0;
     for (uint8_t driver = 0; driver < 4; driver++) {
-      sendDigit((8 - ligne), buffer64[4 * ligne + (3 - driver)]);
+      sendDigit(ligne, buffer64[4 * (9 - ligne) - driver + 31]);
+    }
+    for (uint8_t driver = 0; driver < 4; driver++) {
+      sendDigit(ligne, buffer64[4 * (9 - ligne) - driver - 1 ]);
     }
     MAX72XX_CS1_1;
-  }
-  for (uint8_t ligne = 0; ligne < 8; ligne++) {
-    MAX72XX_CS2_0;
-    for (uint8_t driver = 0; driver < 4; driver++) {
-      sendDigit((8 - ligne), buffer64[4 * ligne + (3 - driver) + 32]);
-    }
-    MAX72XX_CS2_1;
   }
 }
