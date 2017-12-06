@@ -27,4 +27,4 @@ Arduino library for ESP8266 to interface with MAX7219 and MAX7221
   </tr>
 </table>
 
-![Shéma électronique](https://raw.githubusercontent.com/laboiteproject/laboite-maker/master/laboite_bb_1.png)
+![Shéma électronique](https://raw.githubusercontent.com/laboiteproject/laboite-maker/master/images/laboite_bb_1.png)
